@@ -573,12 +573,12 @@ function Page() {
                 ease: "power1.inOut"
             })
         });
-        // Switch to Praying when arrived at Footer
+        // Switch to Handshake when arrived at Footer
         __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ScrollTrigger"].create({
             trigger: "#section-footer",
             start: "top center",
             onEnter: ()=>setCurrentAction({
-                    value: "/Praying.fbx",
+                    value: "/ShakingHands.fbx",
                     type: "fbx"
                 }),
             onLeaveBack: ()=>setCurrentAction({
@@ -717,14 +717,14 @@ function Page() {
                                         lineNumber: 271,
                                         columnNumber: 13
                                     }, this),
-                                    "Cyber",
+                                    "DEXTER",
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-[#88bbff]",
-                                        children: "X"
+                                        children: "X ROBOTICS"
                                     }, void 0, false, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
                                         lineNumber: 272,
-                                        columnNumber: 18
+                                        columnNumber: 19
                                     }, this)
                                 ]
                             }, void 0, true, {
@@ -797,7 +797,7 @@ function Page() {
                                             }, void 0, false, {
                                                 fileName: "[project]/bot-site/src/app/page.jsx",
                                                 lineNumber: 285,
-                                                columnNumber: 33
+                                                columnNumber: 34
                                             }, this)
                                         ]
                                     }, void 0, true, {
@@ -857,17 +857,17 @@ function Page() {
                                         }, void 0, false, {
                                             fileName: "[project]/bot-site/src/app/page.jsx",
                                             lineNumber: 303,
-                                            columnNumber: 20
+                                            columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
                                         lineNumber: 302,
-                                        columnNumber: 17
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/bot-site/src/app/page.jsx",
                                     lineNumber: 301,
-                                    columnNumber: 14
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "text-6xl font-black uppercase tracking-tighter mb-6",
@@ -885,10 +885,85 @@ function Page() {
                                     lineNumber: 306,
                                     columnNumber: 13
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xl text-gray-300 ml-auto border-r-4 border-[#ff88cc] pr-6",
-                                    children: "As you scroll, the GSAP ScrollTrigger takes control of the Three.js canvas. The character smoothly transitions from idling to running, shifting dynamically from right to left."
-                                }, void 0, false, {
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex flex-col gap-6 ml-auto max-w-md",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xl text-gray-300 border-r-4 border-[#ff88cc] pr-6",
+                                            children: "Our advanced neural processing unit allows for real-time skeletal adaptation. Watch as the X-1 model transitions between complex locomotion states with zero latency."
+                                        }, void 0, false, {
+                                            fileName: "[project]/bot-site/src/app/page.jsx",
+                                            lineNumber: 310,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex justify-end gap-4",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex flex-col items-end",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-3xl font-black text-[#ff88cc]",
+                                                            children: "0.02ms"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/bot-site/src/app/page.jsx",
+                                                            lineNumber: 315,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-[10px] uppercase tracking-widest text-gray-500",
+                                                            children: "Latency"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/bot-site/src/app/page.jsx",
+                                                            lineNumber: 316,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/bot-site/src/app/page.jsx",
+                                                    lineNumber: 314,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "w-[1px] h-10 bg-white/10"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/bot-site/src/app/page.jsx",
+                                                    lineNumber: 318,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex flex-col items-end",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-3xl font-black text-[#ff88cc]",
+                                                            children: "120Hz"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/bot-site/src/app/page.jsx",
+                                                            lineNumber: 320,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-[10px] uppercase tracking-widest text-gray-500",
+                                                            children: "Refresh"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/bot-site/src/app/page.jsx",
+                                                            lineNumber: 321,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/bot-site/src/app/page.jsx",
+                                                    lineNumber: 319,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/bot-site/src/app/page.jsx",
+                                            lineNumber: 313,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/bot-site/src/app/page.jsx",
                                     lineNumber: 309,
                                     columnNumber: 13
@@ -918,18 +993,18 @@ function Page() {
                                             className: "w-8 h-8 text-[#88bbff]"
                                         }, void 0, false, {
                                             fileName: "[project]/bot-site/src/app/page.jsx",
-                                            lineNumber: 320,
-                                            columnNumber: 20
+                                            lineNumber: 333,
+                                            columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 319,
-                                        columnNumber: 17
+                                        lineNumber: 332,
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/bot-site/src/app/page.jsx",
-                                    lineNumber: 318,
-                                    columnNumber: 14
+                                    lineNumber: 331,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "text-6xl font-black uppercase tracking-tighter mb-6",
@@ -937,14 +1012,14 @@ function Page() {
                                         "Highly ",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                             fileName: "[project]/bot-site/src/app/page.jsx",
-                                            lineNumber: 324,
+                                            lineNumber: 337,
                                             columnNumber: 22
                                         }, this),
                                         " Optimized"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/bot-site/src/app/page.jsx",
-                                    lineNumber: 323,
+                                    lineNumber: 336,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -952,18 +1027,18 @@ function Page() {
                                     children: "Built with Next.js, React Three Fiber, and Lenis. We ensure smooth 60fps animations by offloading heavy lifting and employing intelligent rendering strategies."
                                 }, void 0, false, {
                                     fileName: "[project]/bot-site/src/app/page.jsx",
-                                    lineNumber: 326,
+                                    lineNumber: 339,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/bot-site/src/app/page.jsx",
-                            lineNumber: 317,
+                            lineNumber: 330,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/bot-site/src/app/page.jsx",
-                        lineNumber: 316,
+                        lineNumber: 329,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -977,7 +1052,7 @@ function Page() {
                                         className: "w-16 h-16 text-[#88bbff] mb-8"
                                     }, void 0, false, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 336,
+                                        lineNumber: 349,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -986,7 +1061,7 @@ function Page() {
                                             "Ready to ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                                lineNumber: 338,
+                                                lineNumber: 351,
                                                 columnNumber: 24
                                             }, this),
                                             " ",
@@ -995,13 +1070,13 @@ function Page() {
                                                 children: "Build?"
                                             }, void 0, false, {
                                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                                lineNumber: 338,
-                                                columnNumber: 30
+                                                lineNumber: 351,
+                                                columnNumber: 31
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 337,
+                                        lineNumber: 350,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1009,20 +1084,20 @@ function Page() {
                                         children: "Get Started Now"
                                     }, void 0, false, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 340,
+                                        lineNumber: 353,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                lineNumber: 335,
+                                lineNumber: 348,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex-1"
                             }, void 0, false, {
                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                lineNumber: 346,
+                                lineNumber: 359,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1034,14 +1109,14 @@ function Page() {
                                             "Join the ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                                lineNumber: 351,
+                                                lineNumber: 364,
                                                 columnNumber: 24
                                             }, this),
                                             " Revolution"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 350,
+                                        lineNumber: 363,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1049,7 +1124,7 @@ function Page() {
                                         children: "Subscribe to our newsletter for the latest updates on interactive 3D web technologies and next-generation frameworks."
                                     }, void 0, false, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 353,
+                                        lineNumber: 366,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1061,7 +1136,7 @@ function Page() {
                                                 className: "px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white outline-none focus:border-[#ff88cc]"
                                             }, void 0, false, {
                                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                                lineNumber: 357,
+                                                lineNumber: 370,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1069,19 +1144,19 @@ function Page() {
                                                 children: "Join"
                                             }, void 0, false, {
                                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                                lineNumber: 358,
+                                                lineNumber: 371,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/bot-site/src/app/page.jsx",
-                                        lineNumber: 356,
+                                        lineNumber: 369,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                lineNumber: 349,
+                                lineNumber: 362,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$bot$2d$site$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1089,13 +1164,13 @@ function Page() {
                                 children: "© 2026 CyberX. All rights reserved."
                             }, void 0, false, {
                                 fileName: "[project]/bot-site/src/app/page.jsx",
-                                lineNumber: 364,
+                                lineNumber: 377,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/bot-site/src/app/page.jsx",
-                        lineNumber: 333,
+                        lineNumber: 346,
                         columnNumber: 9
                     }, this)
                 ]

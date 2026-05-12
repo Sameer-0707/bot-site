@@ -14,7 +14,7 @@ export default function Page() {
   const [currentAction, setCurrentAction] = useState({ value: "idle", type: "gltf" });
   const [entered, setEntered] = useState(false);
   const [introAnimating, setIntroAnimating] = useState(false);
-  
+
   const characterGroupRef = useRef();
   const mainContentRef = useRef();
   const introScreenRef = useRef();
@@ -49,10 +49,10 @@ export default function Page() {
   const handleEnter = () => {
     if (introAnimating || entered) return;
     setIntroAnimating(true);
-    
+
     // Change animation to run
     setCurrentAction({ value: "run", type: "gltf" });
-    
+
     const tl = gsap.timeline({
       onComplete: () => {
         setCurrentAction({ value: "idle", type: "gltf" });
@@ -98,7 +98,7 @@ export default function Page() {
     if (!entered || !characterGroupRef.current) return;
 
     // Reset character for scroll
-    
+
     // Section 2: Features (100vh - 200vh) -> Robot moves Left, Runs.
     ScrollTrigger.create({
       trigger: "#section-features",
@@ -107,7 +107,7 @@ export default function Page() {
       scrub: 1,
       onEnter: () => setCurrentAction({ value: "run", type: "gltf" }),
       onLeaveBack: () => setCurrentAction({ value: "idle", type: "gltf" }),
-      animation: gsap.fromTo(characterGroupRef.current.position, 
+      animation: gsap.fromTo(characterGroupRef.current.position,
         { x: 1.5, y: -1.0, z: 0 },
         { x: -1.5, y: -1.0, z: 0, ease: "power1.inOut" }
       )
@@ -118,7 +118,7 @@ export default function Page() {
       start: "top bottom",
       end: "top top",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.rotation, 
+      animation: gsap.fromTo(characterGroupRef.current.rotation,
         { y: -0.5 },
         { y: -1.5, ease: "power1.inOut" }
       )
@@ -130,7 +130,7 @@ export default function Page() {
       start: "top bottom",
       end: "top top",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.position, 
+      animation: gsap.fromTo(characterGroupRef.current.position,
         { x: -1.5, y: -1.0, z: 0 },
         { x: 1.5, y: -1.0, z: 0, ease: "power1.inOut" }
       )
@@ -142,7 +142,7 @@ export default function Page() {
       start: "top bottom",
       end: "top center",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.rotation, 
+      animation: gsap.fromTo(characterGroupRef.current.rotation,
         { y: -1.5 },
         { y: 1.5, ease: "power1.inOut" }
       )
@@ -154,7 +154,7 @@ export default function Page() {
       start: "top center",
       end: "top top",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.rotation, 
+      animation: gsap.fromTo(characterGroupRef.current.rotation,
         { y: 1.5 },
         { y: -0.5, ease: "power1.inOut" }
       )
@@ -174,7 +174,7 @@ export default function Page() {
       start: "top bottom",
       end: "top top",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.position, 
+      animation: gsap.fromTo(characterGroupRef.current.position,
         { x: 1.5, y: -1.0, z: 0 },
         { x: 0, y: -1.0, z: 1.5, ease: "power1.inOut" }
       )
@@ -186,7 +186,7 @@ export default function Page() {
       start: "top bottom",
       end: "top center",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.rotation, 
+      animation: gsap.fromTo(characterGroupRef.current.rotation,
         { y: -0.5 },
         { y: -1.5, ease: "power1.inOut" }
       )
@@ -198,17 +198,17 @@ export default function Page() {
       start: "top center",
       end: "top top",
       scrub: 1,
-      animation: gsap.fromTo(characterGroupRef.current.rotation, 
+      animation: gsap.fromTo(characterGroupRef.current.rotation,
         { y: -1.5 },
         { y: 0, ease: "power1.inOut" }
       )
     });
 
-    // Switch to Praying when arrived at Footer
+    // Switch to Handshake when arrived at Footer
     ScrollTrigger.create({
       trigger: "#section-footer",
       start: "top center",
-      onEnter: () => setCurrentAction({ value: "/Praying.fbx", type: "fbx" }),
+      onEnter: () => setCurrentAction({ value: "/ShakingHands.fbx", type: "fbx" }),
       onLeaveBack: () => setCurrentAction({ value: "/ShakingHands.fbx", type: "fbx" }),
     });
 
@@ -226,7 +226,7 @@ export default function Page() {
 
   return (
     <div className={`relative w-full min-h-screen bg-[#050505] text-white overflow-x-hidden ${!entered ? "h-screen overflow-hidden" : ""}`}>
-      
+
       {/* 3D Canvas - Fixed in background */}
       <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
         <Canvas camera={{ position: [0, 0.5, 4.5], fov: 50 }}>
@@ -236,7 +236,7 @@ export default function Page() {
 
       {/* Intro Screen */}
       {!entered && (
-        <div 
+        <div
           ref={introScreenRef}
           className="absolute inset-0 z-50 flex items-center justify-end px-20 bg-gradient-to-l from-black via-black/80 to-transparent"
         >
@@ -247,7 +247,7 @@ export default function Page() {
             <p className="text-xl text-gray-300 mb-8 max-w-lg">
               Experience the next generation of interactive web design. A fully scroll-driven 3D journey awaits.
             </p>
-            <button 
+            <button
               onClick={handleEnter}
               className="group relative flex items-center gap-3 px-8 py-4 bg-white text-black font-bold uppercase tracking-wider rounded-full overflow-hidden transition-transform hover:scale-105 cursor-pointer pointer-events-auto"
             >
@@ -260,8 +260,8 @@ export default function Page() {
       )}
 
       {/* Main Website Content - Revealed via Clip Path */}
-      <div 
-        ref={mainContentRef} 
+      <div
+        ref={mainContentRef}
         className="relative z-10 w-full pointer-events-auto"
         style={{ clipPath: "circle(0% at 50% 50%)" }} // Starts hidden
       >
@@ -269,7 +269,7 @@ export default function Page() {
         <header className="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference">
           <div className="text-2xl font-black uppercase tracking-widest flex items-center gap-2">
             <Zap className="w-6 h-6 text-[#ff88cc]" />
-            Cyber<span className="text-[#88bbff]">X</span>
+            DEXTER<span className="text-[#88bbff]">X ROBOTICS</span>
           </div>
           <nav className="flex gap-8 font-semibold tracking-wide uppercase text-sm">
             <a href="#section-hero" className="hover:text-[#88bbff] transition-colors cursor-pointer">Home</a>
@@ -282,13 +282,13 @@ export default function Page() {
         <section id="section-hero" className="w-full h-screen flex items-center px-20 relative">
           <div className="max-w-2xl mt-20">
             <h2 className="text-[5rem] leading-[0.9] font-black uppercase tracking-tighter mb-6">
-              Interactive <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#88bbff] to-[#ff88cc]">3D Web</span>
+              Interactive <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#88bbff] to-[#ff88cc]">3D Web</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-md border-l-4 border-[#88bbff] pl-6">
               Scroll down to explore the immersive 3D world. Watch as the character reacts and moves seamlessly through the environment.
             </p>
           </div>
-          
+
           <div className="absolute bottom-10 left-20 animate-bounce flex flex-col items-center gap-2 text-gray-400 font-semibold tracking-widest uppercase text-xs">
             Scroll to Explore
             <div className="w-[2px] h-12 bg-gradient-to-b from-gray-400 to-transparent"></div>
@@ -298,30 +298,43 @@ export default function Page() {
         {/* Features Section */}
         <section id="section-features" className="w-full h-screen flex items-center justify-end px-20 relative bg-gradient-to-b from-transparent to-black/50">
           <div className="max-w-xl text-right">
-             <div className="flex justify-end mb-6">
-                <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                   <Sparkles className="w-8 h-8 text-[#ff88cc]" />
-                </div>
-             </div>
+            <div className="flex justify-end mb-6">
+              <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
+                <Sparkles className="w-8 h-8 text-[#ff88cc]" />
+              </div>
+            </div>
             <h2 className="text-6xl font-black uppercase tracking-tighter mb-6">
-              Dynamic <br/> Responses
+              Dynamic <br /> Responses
             </h2>
-            <p className="text-xl text-gray-300 ml-auto border-r-4 border-[#ff88cc] pr-6">
-              As you scroll, the GSAP ScrollTrigger takes control of the Three.js canvas. The character smoothly transitions from idling to running, shifting dynamically from right to left.
-            </p>
+            <div className="flex flex-col gap-6 ml-auto max-w-md">
+              <p className="text-xl text-gray-300 border-r-4 border-[#ff88cc] pr-6">
+                Our advanced neural processing unit allows for real-time skeletal adaptation. Watch as the X-1 model transitions between complex locomotion states with zero latency.
+              </p>
+              <div className="flex justify-end gap-4">
+                <div className="flex flex-col items-end">
+                  <span className="text-3xl font-black text-[#ff88cc]">0.02ms</span>
+                  <span className="text-[10px] uppercase tracking-widest text-gray-500">Latency</span>
+                </div>
+                <div className="w-[1px] h-10 bg-white/10"></div>
+                <div className="flex flex-col items-end">
+                  <span className="text-3xl font-black text-[#ff88cc]">120Hz</span>
+                  <span className="text-[10px] uppercase tracking-widest text-gray-500">Refresh</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Performance Section */}
         <section id="section-performance" className="w-full h-screen flex items-center px-20 relative">
           <div className="max-w-xl">
-             <div className="mb-6">
-                <div className="inline-block p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                   <Shield className="w-8 h-8 text-[#88bbff]" />
-                </div>
-             </div>
+            <div className="mb-6">
+              <div className="inline-block p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
+                <Shield className="w-8 h-8 text-[#88bbff]" />
+              </div>
+            </div>
             <h2 className="text-6xl font-black uppercase tracking-tighter mb-6">
-              Highly <br/> Optimized
+              Highly <br /> Optimized
             </h2>
             <p className="text-xl text-gray-300 border-l-4 border-[#88bbff] pl-6">
               Built with Next.js, React Three Fiber, and Lenis. We ensure smooth 60fps animations by offloading heavy lifting and employing intelligent rendering strategies.
@@ -335,20 +348,20 @@ export default function Page() {
           <div className="z-10 max-w-md text-left">
             <Globe className="w-16 h-16 text-[#88bbff] mb-8" />
             <h2 className="text-7xl font-black uppercase tracking-tighter mb-8">
-              Ready to <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#88bbff] to-[#ff88cc]">Build?</span>
+              Ready to <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#88bbff] to-[#ff88cc]">Build?</span>
             </h2>
             <button className="px-10 py-5 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform cursor-pointer">
               Get Started Now
             </button>
           </div>
-          
+
           {/* Center Space for Robot */}
           <div className="flex-1"></div>
 
           {/* Right Content */}
           <div className="z-10 max-w-md text-right flex flex-col items-end">
             <h3 className="text-5xl font-black uppercase tracking-tighter mb-6 text-gray-300">
-              Join the <br/> Revolution
+              Join the <br /> Revolution
             </h3>
             <p className="text-lg text-gray-400 mb-8 border-r-4 border-[#ff88cc] pr-6">
               Subscribe to our newsletter for the latest updates on interactive 3D web technologies and next-generation frameworks.
@@ -360,7 +373,7 @@ export default function Page() {
               </button>
             </div>
           </div>
-          
+
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 font-medium text-sm tracking-widest uppercase">
             © 2026 CyberX. All rights reserved.
           </div>
