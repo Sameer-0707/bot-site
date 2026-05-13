@@ -7,6 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import Scene from "@/components/Scene";
 import { MoveRight, Sparkles, Zap, Shield, Globe } from "lucide-react";
+import CursorGlow from "@/components/CursorGlow";
+import InteractiveDots from "@/components/InteractiveDots";
+import CustomScrollbar from "@/components/CustomScrollbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,10 +17,14 @@ export default function Page() {
   const [currentAction, setCurrentAction] = useState({ value: "idle", type: "gltf" });
   const [entered, setEntered] = useState(false);
   const [introAnimating, setIntroAnimating] = useState(false);
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
   const characterGroupRef = useRef();
   const mainContentRef = useRef();
   const introScreenRef = useRef();
+  const dotsRef = useRef();
+
 
   // Initialize smooth scrolling
   useEffect(() => {
@@ -32,8 +39,10 @@ export default function Page() {
     });
 
     lenis.on("scroll", ScrollTrigger.update);
+    window.lenis = lenis;
 
     gsap.ticker.add((time) => {
+
       lenis.raf(time * 1000);
     });
 
@@ -53,7 +62,13 @@ export default function Page() {
     // Change animation to run
     setCurrentAction({ value: "run", type: "gltf" });
 
+    // Trigger big electric burst
+    if (dotsRef.current) {
+        dotsRef.current.triggerShock(window.innerWidth / 2, window.innerHeight / 2, true);
+    }
+
     const tl = gsap.timeline({
+
       onComplete: () => {
         setCurrentAction({ value: "idle", type: "gltf" });
         setEntered(true);
@@ -218,6 +233,20 @@ export default function Page() {
     };
   }, [entered]);
 
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) return;
+
+    // Simulate API call
+    setSubscribed(true);
+    setEmail("");
+
+    // Reset after some time
+    setTimeout(() => {
+      setSubscribed(false);
+    }, 5000);
+  };
+
   // Initial setup for character
   useEffect(() => {
     // Handled natively by Scene.jsx initial group position
@@ -225,7 +254,14 @@ export default function Page() {
 
 
   return (
-    <div className={`relative w-full min-h-screen bg-[#050505] text-white overflow-x-hidden ${!entered ? "h-screen overflow-hidden" : ""}`}>
+    <div className={`relative w-full min-h-screen text-white overflow-x-hidden ${!entered ? "h-screen overflow-hidden" : ""}`}>
+      {/* Unique Background Layers */}
+      <div className="bg-mesh"></div>
+      <div className="bg-noise"></div>
+      <InteractiveDots ref={dotsRef} />
+      <CursorGlow />
+      {entered && <CustomScrollbar />}
+
 
       {/* 3D Canvas - Fixed in background */}
       <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
@@ -269,7 +305,7 @@ export default function Page() {
         <header className="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference">
           <div className="text-2xl font-black uppercase tracking-widest flex items-center gap-2">
             <Zap className="w-6 h-6 text-[#ff88cc]" />
-            DEXTER<span className="text-[#88bbff]">X ROBOTICS</span>
+            DEXTER<span className="text-[#88bbff]">HACK</span>
           </div>
           <nav className="flex gap-8 font-semibold tracking-wide uppercase text-sm">
             <a href="#section-hero" className="hover:text-[#88bbff] transition-colors cursor-pointer">Home</a>
@@ -366,16 +402,32 @@ export default function Page() {
             <p className="text-lg text-gray-400 mb-8 border-r-4 border-[#ff88cc] pr-6">
               Subscribe to our newsletter for the latest updates on interactive 3D web technologies and next-generation frameworks.
             </p>
-            <div className="flex gap-4">
-              <input type="email" placeholder="Enter your email" className="px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white outline-none focus:border-[#ff88cc]" />
-              <button className="px-6 py-3 bg-[#ff88cc] text-black font-bold rounded-full uppercase text-sm hover:scale-105 transition-transform">
-                Join
-              </button>
-            </div>
+            {subscribed ? (
+              <div className="px-8 py-4 bg-green-500/20 border border-green-500/50 rounded-2xl text-green-400 font-bold animate-pulse">
+                WELCOME TO THE REVOLUTION!
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white outline-none focus:border-[#ff88cc] transition-colors"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-[#ff88cc] text-black font-bold rounded-full uppercase text-sm hover:scale-105 transition-transform active:scale-95"
+                >
+                  Join
+                </button>
+              </form>
+            )}
           </div>
 
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 font-medium text-sm tracking-widest uppercase">
-            © 2026 CyberX. All rights reserved.
+            © 2026 DexterHack. All rights reserved.
           </div>
         </section>
 
