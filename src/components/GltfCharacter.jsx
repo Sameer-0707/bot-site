@@ -17,7 +17,7 @@ export default function GltfCharacter({ actionKey = "idle", visible = true }) {
         child.castShadow = true;
         child.receiveShadow = true;
         child.material = new THREE.MeshStandardMaterial({
-          color: "#aaaaaa",
+          color: "#d83e3eff",
           roughness: 0.4,
           metalness: 0.6,
         });
