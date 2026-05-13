@@ -1,15 +1,18 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import Scene from "@/components/Scene";
 import { MoveRight, Sparkles, Zap, Shield, Globe } from "lucide-react";
 import CursorGlow from "@/components/CursorGlow";
-import InteractiveDots from "@/components/InteractiveDots";
-import CustomScrollbar from "@/components/CustomScrollbar";
+
+const Scene = dynamic(() => import("@/components/Scene"), { ssr: false });
+const InteractiveDots = dynamic(() => import("@/components/InteractiveDots"), { ssr: false });
+const CustomScrollbar = dynamic(() => import("@/components/CustomScrollbar"), { ssr: false });
+
 
 gsap.registerPlugin(ScrollTrigger);
 
