@@ -1,20 +1,31 @@
 {
-  "86022": {
-    "id": 86022,
+  "[project]/src/components/InteractiveDots.jsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/components/InteractiveDots.jsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/63ee3caea8d31bcc.js"
+      "static/chunks/src_components_InteractiveDots_jsx_af80a802._.js",
+      "static/chunks/src_components_InteractiveDots_jsx_df013626._.js"
     ]
   },
-  "55844": {
-    "id": 55844,
+  "[project]/src/components/DigitalRain.jsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/components/DigitalRain.jsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/867ce55067dfacbe.js"
+      "static/chunks/_132af2d7._.js",
+      "static/chunks/src_components_DigitalRain_jsx_df013626._.js"
     ]
   },
-  "77862": {
-    "id": 77862,
+  "[project]/src/components/CustomScrollbar.jsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/components/CustomScrollbar.jsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/85ebe16d67d4d262.js"
+      "static/chunks/src_components_CustomScrollbar_jsx_2b948b91._.js",
+      "static/chunks/src_components_CustomScrollbar_jsx_df013626._.js"
+    ]
+  },
+  "[project]/src/components/Scene.jsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/components/Scene.jsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_7d95cfb6._.js",
+      "static/chunks/src_components_690aebf7._.js",
+      "static/chunks/src_components_Scene_jsx_df013626._.js"
     ]
   }
 }

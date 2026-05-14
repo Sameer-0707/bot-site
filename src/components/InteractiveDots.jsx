@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 
-const InteractiveDots = forwardRef((props, ref) => {
+const InteractiveDots = forwardRef(({ isHacking = false }, ref) => {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const shocksRef = useRef([]);
@@ -41,7 +41,10 @@ const InteractiveDots = forwardRef((props, ref) => {
       curX = nextX;
       curY = nextY;
     }
-    ctx.strokeStyle = `rgba(136, 187, 255, ${opacity})`;
+    
+    // Change lightning color based on hacking
+    const strokeColor = isHacking ? `rgba(0, 100, 255, ${opacity})` : `rgba(136, 187, 255, ${opacity})`;
+    ctx.strokeStyle = strokeColor;
     ctx.lineWidth = 2 * opacity;
     ctx.stroke();
     
@@ -69,8 +72,6 @@ const InteractiveDots = forwardRef((props, ref) => {
     };
 
     const handleWindowClick = (e) => {
-        // Only trigger if clicking background or non-interactive areas
-        // But the user specifically asked for "points click panna", so we just trigger on any click for now
         createShock(e.clientX, e.clientY, false);
     };
 
@@ -79,15 +80,19 @@ const InteractiveDots = forwardRef((props, ref) => {
     window.addEventListener("mousedown", handleWindowClick);
     resize();
 
-    const dotSpacing = 30;
-    const dotRadius = 1.2;
-    const proximityRadius = 150;
+    const dotSpacing = 35; // Slightly wider for cleaner look
+    const dotRadius = 1.0;
+    const proximityRadius = 180;
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       const columns = Math.ceil(canvas.width / dotSpacing);
       const rows = Math.ceil(canvas.height / dotSpacing);
+
+      // Colors for theme
+      const baseDotColor = isHacking ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.15)";
+      const activeDotColor = isHacking ? "rgba(0, 100, 255, " : "rgba(136, 187, 255, ";
 
       // 1. Draw Dots
       ctx.shadowBlur = 0;
@@ -101,22 +106,21 @@ const InteractiveDots = forwardRef((props, ref) => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           let currentRadius = dotRadius;
-          let opacity = 0.15;
-
+          
           if (distance < proximityRadius) {
             const factor = 1 - distance / proximityRadius;
-            currentRadius = dotRadius + factor * 2;
-            opacity = 0.15 + factor * 0.6;
+            currentRadius = dotRadius + factor * 1.5;
+            const opacity = isHacking ? 0.2 + factor * 0.5 : 0.15 + factor * 0.6;
             
-            const shiftX = (dx / distance) * factor * -5;
-            const shiftY = (dy / distance) * factor * -5;
+            const shiftX = (dx / distance) * factor * -3;
+            const shiftY = (dy / distance) * factor * -3;
             
-            ctx.fillStyle = `rgba(136, 187, 255, ${opacity})`;
+            ctx.fillStyle = `${activeDotColor}${opacity})`;
             ctx.beginPath();
             ctx.arc(x + shiftX, y + shiftY, currentRadius, 0, Math.PI * 2);
             ctx.fill();
           } else {
-            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.fillStyle = baseDotColor;
             ctx.beginPath();
             ctx.arc(x, y, currentRadius, 0, Math.PI * 2);
             ctx.fill();
@@ -127,8 +131,8 @@ const InteractiveDots = forwardRef((props, ref) => {
       // 2. Draw Shocks
       shocksRef.current.forEach((shock, sIdx) => {
         ctx.save();
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = "#88bbff";
+        ctx.shadowBlur = isHacking ? 5 : 15;
+        ctx.shadowColor = isHacking ? "#0064ff" : "#88bbff";
         
         shock.arcs.forEach(arc => {
             drawLightning(ctx, shock.x, shock.y, arc.angle, arc.length, arc.segments, arc.displacement, shock.life);
@@ -150,13 +154,13 @@ const InteractiveDots = forwardRef((props, ref) => {
       window.removeEventListener("mousedown", handleWindowClick);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isHacking]);
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-20"
-      style={{ mixBlendMode: "screen" }}
+      style={{ mixBlendMode: isHacking ? "multiply" : "screen" }}
     />
   );
 });

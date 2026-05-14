@@ -4,7 +4,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
-  title: "Cyber XBot | Interactive 3D Experience",
+  title: "Dexter Hack | Interactive 3D Experience",
   description: "Perfect 3D Interactive Web App",
 };
 

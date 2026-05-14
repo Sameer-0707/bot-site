@@ -6,12 +6,13 @@ import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { MoveRight, Sparkles, Zap, Shield, Globe } from "lucide-react";
+import { MoveRight, Sparkles, Zap, Shield, Globe, Menu, X } from "lucide-react";
 import CursorGlow from "@/components/CursorGlow";
 
 const Scene = dynamic(() => import("@/components/Scene"), { ssr: false });
 const InteractiveDots = dynamic(() => import("@/components/InteractiveDots"), { ssr: false });
 const CustomScrollbar = dynamic(() => import("@/components/CustomScrollbar"), { ssr: false });
+const DigitalRain = dynamic(() => import("@/components/DigitalRain"), { ssr: false });
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,6 +23,8 @@ export default function Page() {
   const [introAnimating, setIntroAnimating] = useState(false);
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [isHacking, setIsHacking] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const characterGroupRef = useRef();
   const mainContentRef = useRef();
@@ -34,18 +37,18 @@ export default function Page() {
     if (!entered) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 2.0, 
+      easing: (t) => 1 - Math.pow(1 - t, 4),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
+      wheelMultiplier: 0.8,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
     window.lenis = lenis;
 
     gsap.ticker.add((time) => {
-
       lenis.raf(time * 1000);
     });
 
@@ -62,23 +65,21 @@ export default function Page() {
     if (introAnimating || entered) return;
     setIntroAnimating(true);
 
-    // Change animation to run
     setCurrentAction({ value: "run", type: "gltf" });
 
-    // Trigger big electric burst
     if (dotsRef.current) {
         dotsRef.current.triggerShock(window.innerWidth / 2, window.innerHeight / 2, true);
     }
 
-    const tl = gsap.timeline({
+    const isMobile = window.innerWidth < 768;
 
+    const tl = gsap.timeline({
       onComplete: () => {
         setCurrentAction({ value: "idle", type: "gltf" });
         setEntered(true);
       }
     });
 
-    // 1. Fade out the intro text immediately
     tl.to(introScreenRef.current, {
       opacity: 0,
       duration: 0.8,
@@ -86,24 +87,22 @@ export default function Page() {
       ease: "power2.out"
     }, 0);
 
-    // Intro position: Bot on the Left (-2.0), facing Right (1.5 rad)
-    gsap.set(characterGroupRef.current.position, { x: -2.0, y: -1.0, z: 0 });
+    // Dynamic positioning based on screen size
+    gsap.set(characterGroupRef.current.position, { x: isMobile ? 0 : -2.0, y: -1.0, z: isMobile ? -1 : 0 });
 
-    // 2. Move the robot from left (-2.0) to right (1.5)
     tl.to(characterGroupRef.current.position, {
-      x: 1.5,
+      x: isMobile ? 0 : 1.5,
+      z: isMobile ? 1.5 : 0,
       duration: 2.5,
       ease: "power1.inOut"
     }, 0);
 
-    // 3. Rotate robot to face the camera when it arrives
     tl.to(characterGroupRef.current.rotation, {
-      y: -0.5, // Turn slightly to left to face user
+      y: isMobile ? 0 : -0.5,
       duration: 0.8,
       ease: "power2.inOut"
     }, 1.7);
 
-    // 4. Zoom round effect (clip-path expansion) to reveal website
     tl.to(mainContentRef.current, {
       clipPath: "circle(150% at 50% 50%)",
       duration: 1.5,
@@ -115,9 +114,9 @@ export default function Page() {
   useEffect(() => {
     if (!entered || !characterGroupRef.current) return;
 
-    // Reset character for scroll
+    const isMobile = window.innerWidth < 768;
 
-    // Section 2: Features (100vh - 200vh) -> Robot moves Left, Runs.
+    // Section 2: Features
     ScrollTrigger.create({
       trigger: "#section-features",
       start: "top bottom",
@@ -126,8 +125,8 @@ export default function Page() {
       onEnter: () => setCurrentAction({ value: "run", type: "gltf" }),
       onLeaveBack: () => setCurrentAction({ value: "idle", type: "gltf" }),
       animation: gsap.fromTo(characterGroupRef.current.position,
-        { x: 1.5, y: -1.0, z: 0 },
-        { x: -1.5, y: -1.0, z: 0, ease: "power1.inOut" }
+        { x: isMobile ? 0 : 1.5, y: -1.0, z: isMobile ? 1.5 : 0 },
+        { x: isMobile ? 0 : -1.5, y: -1.0, z: isMobile ? 0 : 0, ease: "power1.inOut" }
       )
     });
 
@@ -137,92 +136,86 @@ export default function Page() {
       end: "top top",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.rotation,
-        { y: -0.5 },
-        { y: -1.5, ease: "power1.inOut" }
+        { y: isMobile ? 0 : -0.5 },
+        { y: isMobile ? 0 : -1.5, ease: "power1.inOut" }
       )
     });
 
-    // Section 3: Performance (200vh - 300vh) -> Robot moves Right.
+    // Section 3: Performance
     ScrollTrigger.create({
       trigger: "#section-performance",
       start: "top bottom",
       end: "top top",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.position,
-        { x: -1.5, y: -1.0, z: 0 },
-        { x: 1.5, y: -1.0, z: 0, ease: "power1.inOut" }
+        { x: isMobile ? 0 : -1.5, y: -1.0, z: isMobile ? 0 : 0 },
+        { x: isMobile ? 0 : 1.5, y: -1.0, z: isMobile ? 1.5 : 0, ease: "power1.inOut" }
       )
     });
 
-    // Rotate to face right while running
     ScrollTrigger.create({
       trigger: "#section-performance",
       start: "top bottom",
       end: "top center",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.rotation,
-        { y: -1.5 },
-        { y: 1.5, ease: "power1.inOut" }
+        { y: isMobile ? 0 : -1.5 },
+        { y: isMobile ? 0 : 1.5, ease: "power1.inOut" }
       )
     });
 
-    // Rotate to face left towards text when arriving
     ScrollTrigger.create({
       trigger: "#section-performance",
       start: "top center",
       end: "top top",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.rotation,
-        { y: 1.5 },
-        { y: -0.5, ease: "power1.inOut" }
+        { y: isMobile ? 0 : 1.5 },
+        { y: isMobile ? 0 : -0.5, ease: "power1.inOut" }
       )
     });
 
-    // Switch to Handshake only when arrived at Performance section
     ScrollTrigger.create({
       trigger: "#section-performance",
-      start: "top center", // Triggers when section reaches middle of screen
+      start: "top center",
       onEnter: () => setCurrentAction({ value: "/ShakingHands.fbx", type: "fbx" }),
       onLeaveBack: () => setCurrentAction({ value: "run", type: "gltf" }),
     });
 
-    // Section 4: Footer/End (300vh - 400vh) -> Robot moves Closer.
+    // Section 4: Footer
     ScrollTrigger.create({
       trigger: "#section-footer",
       start: "top bottom",
       end: "top top",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.position,
-        { x: 1.5, y: -1.0, z: 0 },
+        { x: isMobile ? 0 : 1.5, y: -1.0, z: isMobile ? 1.5 : 0 },
         { x: 0, y: -1.0, z: 1.5, ease: "power1.inOut" }
       )
     });
 
-    // Face left while running to center
     ScrollTrigger.create({
       trigger: "#section-footer",
       start: "top bottom",
       end: "top center",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.rotation,
-        { y: -0.5 },
-        { y: -1.5, ease: "power1.inOut" }
+        { y: isMobile ? 0 : -0.5 },
+        { y: isMobile ? 0 : -1.5, ease: "power1.inOut" }
       )
     });
 
-    // Face front for Praying
     ScrollTrigger.create({
       trigger: "#section-footer",
       start: "top center",
       end: "top top",
       scrub: 1,
       animation: gsap.fromTo(characterGroupRef.current.rotation,
-        { y: -1.5 },
+        { y: isMobile ? 0 : -1.5 },
         { y: 0, ease: "power1.inOut" }
       )
     });
 
-    // Switch to Handshake when arrived at Footer
     ScrollTrigger.create({
       trigger: "#section-footer",
       start: "top center",
@@ -230,7 +223,6 @@ export default function Page() {
       onLeaveBack: () => setCurrentAction({ value: "/ShakingHands.fbx", type: "fbx" }),
     });
 
-    // Clean up
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
@@ -240,36 +232,36 @@ export default function Page() {
     e.preventDefault();
     if (!email || !email.includes("@")) return;
 
-    // Simulate API call
     setSubscribed(true);
     setEmail("");
 
-    // Reset after some time
     setTimeout(() => {
       setSubscribed(false);
     }, 5000);
   };
 
-  // Initial setup for character
-  useEffect(() => {
-    // Handled natively by Scene.jsx initial group position
-  }, [entered, introAnimating]);
+  const toggleHack = () => {
+    setIsHacking(!isHacking);
+  };
 
+  const navLinks = [
+    { name: "Home", href: "#section-hero" },
+    { name: "Features", href: "#section-features" },
+    { name: "Performance", href: "#section-performance" },
+  ];
 
   return (
-    <div className={`relative w-full min-h-screen text-white overflow-x-hidden ${!entered ? "h-screen overflow-hidden" : ""}`}>
-      {/* Unique Background Layers */}
+    <div className={`relative w-full min-h-screen text-white overflow-x-hidden ${!entered ? "h-screen overflow-hidden" : ""} ${isHacking ? "hacking-active" : ""}`}>
       <div className="bg-mesh"></div>
       <div className="bg-noise"></div>
-      <InteractiveDots ref={dotsRef} />
+      <InteractiveDots ref={dotsRef} isHacking={isHacking} />
       <CursorGlow />
       {entered && <CustomScrollbar />}
 
-
-      {/* 3D Canvas - Fixed in background */}
       <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
-        <Canvas camera={{ position: [0, 0.5, 4.5], fov: 50 }}>
-          <Scene action={currentAction} characterRef={characterGroupRef} />
+        <Canvas camera={{ position: [0, 0.5, 4.5], fov: typeof window !== "undefined" && window.innerWidth < 768 ? 65 : 50 }}>
+          <Scene action={currentAction} characterRef={characterGroupRef} isHacking={isHacking} />
+          {entered && <DigitalRain intensity={isHacking ? 2.5 : 1.0} />}
         </Canvas>
       </div>
 
@@ -277,13 +269,13 @@ export default function Page() {
       {!entered && (
         <div
           ref={introScreenRef}
-          className="absolute inset-0 z-50 flex items-center justify-end px-20 bg-gradient-to-l from-black via-black/80 to-transparent"
+          className="absolute inset-0 z-50 flex items-center justify-center md:justify-end px-6 md:px-20 bg-gradient-to-b md:bg-gradient-to-l from-black via-black/80 to-transparent"
         >
-          <div className="max-w-2xl text-right flex flex-col items-end">
-            <h1 className="text-7xl font-black uppercase tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-l from-white to-[#88bbff]">
+          <div className="max-w-2xl text-center md:text-right flex flex-col items-center md:items-end">
+            <h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-l from-white to-[#88bbff]">
               Welcome to the Future
             </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-lg">
+            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-lg">
               Experience the next generation of interactive web design. A fully scroll-driven 3D journey awaits.
             </p>
             <button
@@ -298,65 +290,101 @@ export default function Page() {
         </div>
       )}
 
-      {/* Main Website Content - Revealed via Clip Path */}
+      {/* Main Website Content */}
       <div
         ref={mainContentRef}
         className="relative z-10 w-full pointer-events-auto"
-        style={{ clipPath: "circle(0% at 50% 50%)" }} // Starts hidden
+        style={{ clipPath: "circle(0% at 50% 50%)" }} 
       >
         {/* Header */}
-        <header className="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference">
-          <div className="text-2xl font-black uppercase tracking-widest flex items-center gap-2">
-            <Zap className="w-6 h-6 text-[#ff88cc]" />
+        <header className="fixed top-0 left-0 w-full p-4 md:p-8 flex justify-between items-center z-50 mix-blend-difference">
+          <div className="text-xl md:text-2xl font-black uppercase tracking-widest flex items-center gap-2">
+            <Zap className="w-5 h-5 md:w-6 h-6 text-[#ff88cc]" />
             DEXTER<span className="text-[#88bbff]">HACK</span>
           </div>
-          <nav className="flex gap-8 font-semibold tracking-wide uppercase text-sm">
-            <a href="#section-hero" className="hover:text-[#88bbff] transition-colors cursor-pointer">Home</a>
-            <a href="#section-features" className="hover:text-[#88bbff] transition-colors cursor-pointer">Features</a>
-            <a href="#section-performance" className="hover:text-[#88bbff] transition-colors cursor-pointer">Performance</a>
+          
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-8 font-semibold tracking-wide uppercase text-sm items-center">
+            {navLinks.map(link => (
+              <a key={link.name} href={link.href} className="hover:text-[#88bbff] transition-colors cursor-pointer">{link.name}</a>
+            ))}
+            <button 
+              onClick={toggleHack}
+              className={`px-4 py-2 border-2 rounded-lg font-black transition-all duration-300 ${isHacking ? "bg-green-500 border-green-500 text-black scale-110" : "bg-transparent border-[#ff88cc] text-[#ff88cc] hover:bg-[#ff88cc] hover:text-black"}`}
+            >
+              {isHacking ? "HACKING..." : "ACTIVATE HACK"}
+            </button>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-white"
+          >
+            {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+          </button>
         </header>
 
+        {/* Mobile Menu Overlay */}
+        <div className={`fixed inset-0 z-40 bg-black transition-transform duration-500 ${isMenuOpen ? "translate-x-0" : "translate-x-full"} md:hidden flex flex-col items-center justify-center gap-8`}>
+          {navLinks.map(link => (
+            <a 
+              key={link.name} 
+              href={link.href} 
+              onClick={() => setIsMenuOpen(false)}
+              className="text-4xl font-black uppercase tracking-tighter hover:text-[#88bbff] transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <button 
+            onClick={() => { toggleHack(); setIsMenuOpen(false); }}
+            className={`px-8 py-4 border-2 rounded-lg font-black transition-all duration-300 ${isHacking ? "bg-green-500 border-green-500 text-black scale-110" : "bg-transparent border-[#ff88cc] text-[#ff88cc]"}`}
+          >
+            {isHacking ? "HACKING..." : "ACTIVATE HACK"}
+          </button>
+        </div>
+
         {/* Hero Section */}
-        <section id="section-hero" className="w-full h-screen flex items-center px-20 relative">
-          <div className="max-w-2xl mt-20">
-            <h2 className="text-[5rem] leading-[0.9] font-black uppercase tracking-tighter mb-6">
+        <section id="section-hero" className="w-full h-screen flex items-center justify-center md:justify-start px-6 md:px-20 relative">
+          <div className="max-w-2xl mt-20 text-center md:text-left">
+            <h2 className="text-5xl md:text-[5rem] leading-[0.9] font-black uppercase tracking-tighter mb-6">
               Interactive <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#88bbff] to-[#ff88cc]">3D Web</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-md border-l-4 border-[#88bbff] pl-6">
+            <p className="text-lg md:text-xl text-gray-300 max-w-md border-l-0 md:border-l-4 border-[#88bbff] md:pl-6 mx-auto md:mx-0">
               Scroll down to explore the immersive 3D world. Watch as the character reacts and moves seamlessly through the environment.
             </p>
           </div>
 
-          <div className="absolute bottom-10 left-20 animate-bounce flex flex-col items-center gap-2 text-gray-400 font-semibold tracking-widest uppercase text-xs">
+          <div className="absolute bottom-10 left-1/2 md:left-20 -translate-x-1/2 md:translate-x-0 animate-bounce flex flex-col items-center gap-2 text-gray-400 font-semibold tracking-widest uppercase text-xs">
             Scroll to Explore
             <div className="w-[2px] h-12 bg-gradient-to-b from-gray-400 to-transparent"></div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section id="section-features" className="w-full h-screen flex items-center justify-end px-20 relative bg-gradient-to-b from-transparent to-black/50">
-          <div className="max-w-xl text-right">
-            <div className="flex justify-end mb-6">
+        <section id="section-features" className="w-full h-screen flex items-center justify-center md:justify-end px-6 md:px-20 relative bg-gradient-to-b from-transparent to-black/50">
+          <div className="max-w-xl text-center md:text-right">
+            <div className="flex justify-center md:justify-end mb-6">
               <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
                 <Sparkles className="w-8 h-8 text-[#ff88cc]" />
               </div>
             </div>
-            <h2 className="text-6xl font-black uppercase tracking-tighter mb-6">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">
               Dynamic <br /> Responses
             </h2>
-            <div className="flex flex-col gap-6 ml-auto max-w-md">
-              <p className="text-xl text-gray-300 border-r-4 border-[#ff88cc] pr-6">
+            <div className="flex flex-col gap-6 mx-auto md:ml-auto max-w-md">
+              <p className="text-lg md:text-xl text-gray-300 border-r-0 md:border-r-4 border-[#ff88cc] md:pr-6">
                 Our advanced neural processing unit allows for real-time skeletal adaptation. Watch as the X-1 model transitions between complex locomotion states with zero latency.
               </p>
-              <div className="flex justify-end gap-4">
-                <div className="flex flex-col items-end">
-                  <span className="text-3xl font-black text-[#ff88cc]">0.02ms</span>
+              <div className="flex justify-center md:justify-end gap-4">
+                <div className="flex flex-col items-center md:items-end">
+                  <span className="text-2xl md:text-3xl font-black text-[#ff88cc]">0.02ms</span>
                   <span className="text-[10px] uppercase tracking-widest text-gray-500">Latency</span>
                 </div>
                 <div className="w-[1px] h-10 bg-white/10"></div>
-                <div className="flex flex-col items-end">
-                  <span className="text-3xl font-black text-[#ff88cc]">120Hz</span>
+                <div className="flex flex-col items-center md:items-end">
+                  <span className="text-2xl md:text-3xl font-black text-[#ff88cc]">120Hz</span>
                   <span className="text-[10px] uppercase tracking-widest text-gray-500">Refresh</span>
                 </div>
               </div>
@@ -365,44 +393,44 @@ export default function Page() {
         </section>
 
         {/* Performance Section */}
-        <section id="section-performance" className="w-full h-screen flex items-center px-20 relative">
-          <div className="max-w-xl">
-            <div className="mb-6">
+        <section id="section-performance" className="w-full h-screen flex items-center justify-center md:justify-start px-6 md:px-20 relative">
+          <div className="max-w-xl text-center md:text-left">
+            <div className="mb-6 flex justify-center md:justify-start">
               <div className="inline-block p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
                 <Shield className="w-8 h-8 text-[#88bbff]" />
               </div>
             </div>
-            <h2 className="text-6xl font-black uppercase tracking-tighter mb-6">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">
               Highly <br /> Optimized
             </h2>
-            <p className="text-xl text-gray-300 border-l-4 border-[#88bbff] pl-6">
+            <p className="text-lg md:text-xl text-gray-300 border-l-0 md:border-l-4 border-[#88bbff] md:pl-6">
               Built with Next.js, React Three Fiber, and Lenis. We ensure smooth 60fps animations by offloading heavy lifting and employing intelligent rendering strategies.
             </p>
           </div>
         </section>
 
         {/* Footer Section */}
-        <section id="section-footer" className="w-full h-screen flex items-center justify-between px-20 relative bg-gradient-to-t from-[#0a0f1e] to-transparent">
+        <section id="section-footer" className="w-full min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-20 relative bg-gradient-to-t from-[#0a0f1e] to-transparent overflow-hidden">
           {/* Left Content */}
-          <div className="z-10 max-w-md text-left">
-            <Globe className="w-16 h-16 text-[#88bbff] mb-8" />
-            <h2 className="text-7xl font-black uppercase tracking-tighter mb-8">
+          <div className="z-10 max-w-md text-center md:text-left mb-12 md:mb-0">
+            <Globe className="w-12 h-12 md:w-16 h-16 text-[#88bbff] mb-6 md:mb-8 mx-auto md:mx-0" />
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 md:mb-8">
               Ready to <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#88bbff] to-[#ff88cc]">Build?</span>
             </h2>
-            <button className="px-10 py-5 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform cursor-pointer">
+            <button className="px-8 md:px-10 py-4 md:py-5 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform cursor-pointer">
               Get Started Now
             </button>
           </div>
 
-          {/* Center Space for Robot */}
-          <div className="flex-1"></div>
+          {/* Center Space for Robot (Hidden on very small mobile if needed, or just let it exist) */}
+          <div className="flex-1 md:block"></div>
 
           {/* Right Content */}
-          <div className="z-10 max-w-md text-right flex flex-col items-end">
-            <h3 className="text-5xl font-black uppercase tracking-tighter mb-6 text-gray-300">
+          <div className="z-10 max-w-md text-center md:text-right flex flex-col items-center md:items-end">
+            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6 text-gray-300">
               Join the <br /> Revolution
             </h3>
-            <p className="text-lg text-gray-400 mb-8 border-r-4 border-[#ff88cc] pr-6">
+            <p className="text-base md:text-lg text-gray-400 mb-8 border-r-0 md:border-r-4 border-[#ff88cc] md:pr-6">
               Subscribe to our newsletter for the latest updates on interactive 3D web technologies and next-generation frameworks.
             </p>
             {subscribed ? (
@@ -410,18 +438,18 @@ export default function Page() {
                 WELCOME TO THE REVOLUTION!
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-4">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 w-full">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white outline-none focus:border-[#ff88cc] transition-colors"
+                  className="px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white outline-none focus:border-[#ff88cc] transition-colors flex-1"
                   required
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#ff88cc] text-black font-bold rounded-full uppercase text-sm hover:scale-105 transition-transform active:scale-95"
+                  className="px-6 py-3 bg-[#ff88cc] text-black font-bold rounded-full uppercase text-sm hover:scale-105 transition-transform active:scale-95 whitespace-nowrap"
                 >
                   Join
                 </button>
@@ -429,7 +457,7 @@ export default function Page() {
             )}
           </div>
 
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 font-medium text-sm tracking-widest uppercase">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-gray-500 font-medium text-[10px] md:text-xs tracking-widest uppercase w-full text-center">
             © 2026 DexterHack. All rights reserved.
           </div>
         </section>

@@ -1,16 +1,28 @@
 {
   "pages": {
     "/page": [
-      "static/chunks/8755c1115e04b363.css",
-      "static/chunks/060f9a97930f3d04.js",
-      "static/chunks/71e327c2f7a8fcb9.js",
-      "static/chunks/344c804533eb8a19.js",
-      "static/chunks/6b10a99b0f9155b5.js",
-      "static/chunks/629caacaf0348360.js",
-      "static/chunks/ca9819ad468fc1bb.js",
-      "static/chunks/0ed411adebc7f91d.js",
-      "static/chunks/496e966406cb48d9.js",
-      "static/chunks/turbopack-a28dfe27a0a1da00.js"
+      "static/chunks/[root-of-the-server]__de129a4c._.css",
+      "static/chunks/node_modules_next_dist_8db7fb1f._.js",
+      "static/chunks/src_app_layout_jsx_0a548d63._.js",
+      "static/chunks/node_modules_next_dist_client_components_builtin_global-error_2c39382b.js",
+      "static/chunks/src_components_d8a62fe4._.js",
+      "static/chunks/node_modules_three_build_three_core_996ef05a.js",
+      "static/chunks/node_modules_three_build_three_module_0c59ee63.js",
+      "static/chunks/node_modules_three_build_three_module_f7d46d9b.js",
+      "static/chunks/node_modules_@react-three_fiber_dist_6db76006._.js",
+      "static/chunks/node_modules_gsap_f48a6384._.js",
+      "static/chunks/node_modules_b729368a._.js",
+      "static/chunks/src_4215369a._.js",
+      "static/chunks/src_app_page_jsx_2c39382b._.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_57d40746._.js",
+      "static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js",
+      "static/chunks/node_modules_next_dist_compiled_next-devtools_index_a9cb0712.js",
+      "static/chunks/node_modules_next_dist_compiled_5150ccfd._.js",
+      "static/chunks/node_modules_next_dist_client_cf1d9188._.js",
+      "static/chunks/node_modules_next_dist_b0daae9a._.js",
+      "static/chunks/node_modules_@swc_helpers_cjs_b3dc30d6._.js",
+      "static/chunks/_a0ff3932._.js",
+      "static/chunks/turbopack-_cdba956c._.js"
     ]
   }
 }

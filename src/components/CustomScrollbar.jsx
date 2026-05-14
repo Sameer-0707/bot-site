@@ -73,35 +73,35 @@ export default function CustomScrollbar() {
   const currentColor = getProgressColor();
 
   return (
-    <div className="fixed right-6 top-1/2 -translate-y-1/2 h-[35vh] w-3 z-[100] flex flex-col items-center select-none">
+    <div className="fixed right-4 top-1/2 -translate-y-1/2 h-[40vh] w-1.5 z-[100] flex flex-col items-center select-none">
       {/* Track Background - Draggable */}
       <div 
         ref={trackRef}
         onMouseDown={handleMouseDown}
-        className={`absolute inset-0 bg-white/5 rounded-full border border-white/10 w-full overflow-hidden backdrop-blur-[2px] cursor-pointer pointer-events-auto group hover:bg-white/10 transition-colors ${isDragging ? "bg-white/20" : ""}`}
+        className={`absolute inset-0 bg-white/5 rounded-full border border-white/5 w-full overflow-hidden backdrop-blur-[1px] cursor-pointer pointer-events-auto group hover:bg-white/10 transition-colors ${isDragging ? "bg-white/15" : ""}`}
       >
         {/* The Energy Fill Bar */}
         <div 
           className="absolute top-0 left-0 w-full rounded-full origin-top pointer-events-none"
           style={{ 
             height: `${scrollProgress * 100}%`,
-            background: `linear-gradient(to bottom, ${currentColor}33, ${currentColor})`,
-            boxShadow: (isScrolling || isDragging) ? `0 0 30px ${currentColor}` : `0 0 10px ${currentColor}`,
+            background: `linear-gradient(to bottom, ${currentColor}22, ${currentColor})`,
+            boxShadow: (isScrolling || isDragging) ? `0 0 20px ${currentColor}` : `0 0 5px ${currentColor}`,
             transition: "box-shadow 0.3s ease" 
           }}
         >
             {/* The "Energy Light Head" */}
             <div 
-                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full transition-transform duration-200 ${(isScrolling || isDragging) ? "scale-125" : "scale-100"}`}
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full transition-transform duration-200 ${(isScrolling || isDragging) ? "scale-110" : "scale-100"}`}
                 style={{
                     backgroundColor: '#fff',
-                    boxShadow: `0 0 20px 4px #fff, 0 0 40px 10px ${currentColor}`,
+                    boxShadow: `0 0 10px 2px #fff, 0 0 25px 6px ${currentColor}`,
                 }}
             >
-                <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-70" />
+                <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-50" />
             </div>
             
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-30" />
         </div>
       </div>
       
@@ -111,8 +111,8 @@ export default function CustomScrollbar() {
           className="absolute w-full pointer-events-none"
           style={{ top: `${scrollProgress * 100}%` }}
         >
-           <div className="absolute -right-4 w-1.5 h-6 bg-white/40 blur-[1.5px] animate-pulse" />
-           <div className="absolute -left-4 w-1.5 h-6 bg-white/40 blur-[1.5px] animate-pulse" />
+           <div className="absolute -right-2 w-1 h-4 bg-white/30 blur-[1px] animate-pulse" />
+           <div className="absolute -left-2 w-1 h-4 bg-white/30 blur-[1px] animate-pulse" />
         </div>
       )}
     </div>

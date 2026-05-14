@@ -32,24 +32,24 @@ function CursorLight() {
   );
 }
 
-export default function Scene({ action, characterRef }) {
+export default function Scene({ action, characterRef, isHacking = false }) {
   return (
     <>
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr" />
 
-      <ambientLight intensity={0.5} color="#4466ff" />
+      <ambientLight intensity={isHacking ? 1.5 : 0.5} color={isHacking ? "#ffffff" : "#4466ff"} />
       
       <CursorLight />
       <DigitalRain />
       
       {/* Front Main Light */}
-      <directionalLight position={[2, 5, 5]} intensity={2.5} color="#ffffff" castShadow />
+      <directionalLight position={[2, 5, 5]} intensity={isHacking ? 1.5 : 2.5} color="#ffffff" castShadow />
       
       {/* Left Pink Fill Light */}
-      <pointLight position={[-5, 2, -2]} intensity={5} color="#ff88cc" />
+      <pointLight position={[-5, 2, -2]} intensity={isHacking ? 2 : 5} color={isHacking ? "#88bbff" : "#ff88cc"} />
       
       {/* Right Cyan Backlight */}
-      <pointLight position={[5, 2, -5]} intensity={5} color="#88bbff" />
+      <pointLight position={[5, 2, -5]} intensity={isHacking ? 2 : 5} color="#88bbff" />
 
       <group ref={characterRef} position={[-2.0, -1.0, 0]} rotation={[0, 1.5, 0]}>
         {action.type === "fbx" ? (
@@ -59,9 +59,12 @@ export default function Scene({ action, characterRef }) {
         )}
       </group>
 
-      <ContactShadows scale={10} blur={2.5} far={3} opacity={0.7} position={[0, -0.99, 0]} />
+      <ContactShadows scale={10} blur={2.5} far={3} opacity={isHacking ? 0.3 : 0.7} position={[0, -0.99, 0]} />
 
-      <gridHelper args={[50, 50, "#223355", "#0a0a0a"]} position={[0, -0.99, 0]} />
+      <gridHelper 
+        args={[50, 50, isHacking ? "#cccccc" : "#223355", isHacking ? "#eeeeee" : "#0a0a0a"]} 
+        position={[0, -0.99, 0]} 
+      />
 
       <mesh
         rotation={[-Math.PI / 2, 0, 0]}
@@ -69,10 +72,14 @@ export default function Scene({ action, characterRef }) {
         receiveShadow
       >
         <planeGeometry args={[50, 50]} />
-        <meshStandardMaterial color="#050510" roughness={0.4} metalness={0.8} />
+        <meshStandardMaterial 
+          color={isHacking ? "#f0f5ff" : "#050510"} 
+          roughness={isHacking ? 0.1 : 0.4} 
+          metalness={isHacking ? 0.2 : 0.8} 
+        />
       </mesh>
 
-      <fog attach="fog" args={["#0a0a0a", 5, 20]} />
+      <fog attach="fog" args={[isHacking ? "#ffffff" : "#0a0a0a", 5, 25]} />
     </>
   );
 }
